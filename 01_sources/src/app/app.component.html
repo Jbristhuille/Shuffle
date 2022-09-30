@@ -4,6 +4,77 @@
  * @ Description: Main component template
  -->
 
+<!-- SUMMARY
+  -- Color generation
+    -- Menu button
+    -- Copied to clipboard message
+    -- Clipboard button
+    -- Save button
+    -- Hex code
+    -- Randomize button
+-->
+
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Color generation -->
+  <div id="color-generation-container" [style.background]="'#'+color">
+     <!-- Menu button -->
+     <button id="menu-button" [ngClass]="{
+                                'btn md prm center': true,
+                                'scnd': isConstrasted
+                              }">
+      <i class="icon burger"></i>
+    </button>
+    <!---->
+
+    <div id="sub-button-container">
+      <div id="user-button">
+        <!-- Copied to clipboard message -->
+        <div  *ngIf="false"
+              [ngClass]="{
+                'tag md prm': true,
+                'scnd': isConstrasted
+              }">
+          Copied
+        </div>
+        <!---->
+
+        <!-- Clipboard button -->
+        <button [ngClass]="{
+                  'btn md prm center': true,
+                  'scnd': isConstrasted
+                }">
+          <i class="icon clipboard"></i>
+        </button>
+        <!---->
+
+        <!-- Save button -->
+        <button [ngClass]="{
+                  'btn md prm center': true,
+                  'scnd': isConstrasted
+                }">
+          <i class="icon heart"></i>
+        </button>
+        <!---->
+      </div>
+
+      <!-- Hex code -->
+      <div id="hex-code"  [ngClass]="{
+                            'h3 t_black': true,
+                            't_white': isConstrasted
+                          }">{{color}}</div>
+      <!---->
+    </div>
+
+    <!-- Randomize button -->
+    <button id="generate-button"
+            [ngClass]="{
+              'btn md prm center': true,
+              'scnd': isConstrasted
+            }"
+            (click)="genRandomColor()">
+      Generate
+    </button>
+    <!---->
+  </div>
+  <!---->
 </ion-app>

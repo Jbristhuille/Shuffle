@@ -4,3 +4,50 @@
  * @ Description: Main component style
  */
 
+/* SUMMARY
+  * Variables
+  * Color generation
+*/
+
+/* Variables */
+* {
+  --margin: 32px;
+}
+/***/
+
+/* Color generation */
+#color-generation-container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  #menu-button {
+    position: fixed;
+    top: var(--margin);
+    left: var(--margin);
+  }
+
+  #sub-button-container {
+    display: grid;
+    justify-content: center;
+
+    #user-button {
+      display: grid;
+      justify-items: center;
+      grid-gap: 16px;
+    }
+
+    #hex-code {
+      margin: 48px;
+    }
+  }
+
+  #generate-button {
+    margin: var(--margin);
+    margin-top: 0;
+  }
+}
+/***/
