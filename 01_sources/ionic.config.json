@@ -1,0 +1,7 @@
+{
+  "name": "hexandom",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
