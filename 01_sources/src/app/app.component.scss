@@ -6,13 +6,26 @@
 
 /* SUMMARY
   * Variables
+  * Global
   * Favorites
+    * Colors list
   * Color generation
 */
 
 /* Variables */
 * {
   --margin: 32px;
+}
+/***/
+
+/* Global */
+.copy-message {
+  opacity: 1;
+  transition: opacity ease 0.3s;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 /***/
 
@@ -33,10 +46,12 @@
     padding: 32px;
   }
 
+  /* Colors list */
   #saved-color-list {
     .item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .h5 {
         margin: 32px;
@@ -46,19 +61,22 @@
 
       .buttons {
         display: flex;
+        align-items: center;
         margin-right: 32px;
 
-        button {
+        button, div {
           margin-top: 16px;
           margin-bottom: 16px;
+          margin-right: 16px;
 
           &:last-child {
-            margin-left: 16px;
+            margin-right: 0;
           }
         }
       }
     }
   }
+  /***/
 }
 /***/
 

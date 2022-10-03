@@ -9,6 +9,7 @@
   * Name: getStorage
   * Name: saveColor
   * Name: isSaved
+  * Name: copyToClipboard
   * Name: genRandomColor
   * Name: componentToHex
   * Name: rgbToHex
@@ -32,6 +33,8 @@ export class AppComponent implements OnInit {
   public isConstrasted: boolean = true;
 
   public favoritesOpen: boolean = false;
+
+  public copiedColor: string;
 
   constructor() {
   }
@@ -96,6 +99,23 @@ export class AppComponent implements OnInit {
     });
 
     return ret ? true : false;
+  }
+  /***/
+
+  /*
+  * Name: copyToClipboard
+  * Description: Copy color to clipboard
+  *
+  * Args:
+  * - color (String): Color to copy
+  */
+  public copyToClipboard(color): void {
+    navigator.clipboard.writeText('#'+color);
+    this.copiedColor = color;
+
+    setTimeout(() => {
+      this.copiedColor = null;
+    }, 2000);
   }
   /***/
 

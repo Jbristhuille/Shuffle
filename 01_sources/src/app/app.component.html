@@ -47,7 +47,7 @@
       <div  *ngFor="let c of savedColors"
             class="item"
             [style.background]="'#'+c"
-            (click)="color = c; favoritesOpen = false">
+            (click)="color = c; isConstrasted = checkContrast(hexToRgb(c)); favoritesOpen = false">
         <div  [ngClass]="{
                 'h5 t_white': true,
                 't_black': !checkContrast(hexToRgb(c))
@@ -56,13 +56,6 @@
         </div>
 
         <div class="buttons">
-          <button [ngClass]="{
-            'btn md prm center': true,
-            'scnd': checkContrast(hexToRgb(c))
-          }">
-            <i class="icon clipboard"></i>
-          </button>
-
           <button (click)="saveColor(c)"
                   [ngClass]="{
                     'btn md prm center': true,
@@ -93,17 +86,18 @@
     <div id="sub-button-container">
       <div id="user-button">
         <!-- Copied to clipboard message -->
-        <div  *ngIf="false"
-              [ngClass]="{
-                'tag md prm': true,
-                'scnd': isConstrasted
+        <div  [ngClass]="{
+                'tag md prm copy-message': true,
+                'scnd': isConstrasted,
+                'hidden': copiedColor != color
               }">
           Copied
         </div>
         <!---->
 
         <!-- Clipboard button -->
-        <button [ngClass]="{
+        <button (click)="copyToClipboard(color)"
+                [ngClass]="{
                   'btn md prm center': true,
                   'scnd': isConstrasted
                 }">
