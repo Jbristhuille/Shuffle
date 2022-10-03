@@ -6,12 +6,59 @@
 
 /* SUMMARY
   * Variables
+  * Favorites
   * Color generation
 */
 
 /* Variables */
 * {
   --margin: 32px;
+}
+/***/
+
+/* Favorites */
+#favorites-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  transition: left ease 0.3s;
+  left: -100%;
+
+  &.open {
+    left: 0;
+  }
+
+  .navbar {
+    padding: 32px;
+  }
+
+  #saved-color-list {
+    .item {
+      display: flex;
+      justify-content: space-between;
+
+      .h5 {
+        margin: 32px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
+      .buttons {
+        display: flex;
+        margin-right: 32px;
+
+        button {
+          margin-top: 16px;
+          margin-bottom: 16px;
+
+          &:last-child {
+            margin-left: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 /***/
 

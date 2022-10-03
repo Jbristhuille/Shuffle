@@ -6,9 +6,13 @@
 
 /* SUMMARY
   * Angular
+  * Name: getStorage
+  * Name: saveColor
+  * Name: isSaved
   * Name: genRandomColor
   * Name: componentToHex
   * Name: rgbToHex
+  * Name: hexToRgb
   * Name: checkConstrast
 */
 
@@ -22,15 +26,78 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public savedColors: string[] = [];
+
   public color: string = "6DED35";
   public isConstrasted: boolean = true;
+
+  public favoritesOpen: boolean = false;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.savedColors = this.getStorage();
     this.genRandomColor();
   }
+
+  /*
+  * Name: getStorage
+  * Description: Get saved list colors
+  *
+  * Return (Array<string>): Colors list
+  */
+  private getStorage(): string[] {
+    let ret;
+
+    try {
+      ret = localStorage.getItem('colors');
+      ret = ret ? JSON.parse(ret) : [];
+    } catch (e) {
+      console.error(e);
+      ret = [];
+    }
+
+    return (ret);
+  }
+  /***/
+
+  /*
+  * Name: saveColor
+  * Description: Save color in favorites
+  *
+  * Args:
+  * - color (String): Color in HEX format
+  */
+  public saveColor(color): void {
+    let alreadySave = this.savedColors.findIndex((el) => {
+      return el == color;
+    });
+
+    if (alreadySave != -1) this.savedColors.splice(alreadySave, 1);
+    else this.savedColors.push(color);
+
+    localStorage.setItem('colors', JSON.stringify(this.savedColors));
+  }
+  /***/
+
+  /*
+  * Name: isSaved
+  * Description: Check if color is already saved
+  *
+  * Args:
+  * - color (String): Color to check
+  *
+  * Return (Boolean): Is saved or not
+  */
+  public isSaved(color): boolean {
+    let ret = this.savedColors.find((el) => {
+      return el == color;
+    });
+
+    return ret ? true : false;
+  }
+  /***/
 
   /*
   * Name: genRandomColor
@@ -83,6 +150,26 @@ export class AppComponent implements OnInit {
   /***/
 
   /*
+  * Name: hexToRgb
+  * Description: Convert HEX color to RGB
+  *
+  * Args:
+  * - color (String): Color in HEX format
+  *
+  * Return (Array<number>): Color in RGB
+  */
+  public hexToRgb(color): number[] {
+    let aRgbHex = color.match(/.{1,2}/g);
+    let aRgb = [
+        parseInt(aRgbHex[0], 16),
+        parseInt(aRgbHex[1], 16),
+        parseInt(aRgbHex[2], 16)
+    ];
+   return (aRgb);
+  }
+  /***/
+
+  /*
   * Name: checkConstrast
   * Description: Check if button need to be constrasted
   *
@@ -91,7 +178,7 @@ export class AppComponent implements OnInit {
   *
   * Return (Boolean): Need to be constrasted or not
   */
-  private checkContrast(rgb: Array<number>): boolean {
+  public checkContrast(rgb: Array<number>): boolean {
     let brightness = Math.round(( (rgb[0] * 299) +
                                   (rgb[1] * 587) +
                                   (rgb[2] * 114)) / 1000);

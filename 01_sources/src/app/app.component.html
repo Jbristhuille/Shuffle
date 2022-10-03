@@ -5,6 +5,9 @@
  -->
 
 <!-- SUMMARY
+  -- Favorites
+    -- Navbar
+    -- Saved list
   -- Color generation
     -- Menu button
     -- Copied to clipboard message
@@ -15,13 +18,74 @@
 -->
 
 <ion-app>
+  <!-- Favorites -->
+  <div  id="favorites-container"
+        [ngClass]="{
+          'bg_black t_white': true,
+          'open': favoritesOpen
+        }">
+    <!-- Navarbar -->
+    <nav class="navbar transparent">
+      <div class="start">
+        <div class="item">
+          <h3 class="t_white m-0">Favorites</h3>
+        </div>
+      </div>
+
+      <div class="end">
+        <div class="item">
+          <button  id="menu-button" (click)="favoritesOpen = false" class="btn md scnd">
+           <i class="icon cross-1"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!---->
+
+    <!-- Saved list -->
+    <div id="saved-color-list">
+      <div  *ngFor="let c of savedColors"
+            class="item"
+            [style.background]="'#'+c"
+            (click)="color = c; favoritesOpen = false">
+        <div  [ngClass]="{
+                'h5 t_white': true,
+                't_black': !checkContrast(hexToRgb(c))
+              }">
+          {{c}}
+        </div>
+
+        <div class="buttons">
+          <button [ngClass]="{
+            'btn md prm center': true,
+            'scnd': checkContrast(hexToRgb(c))
+          }">
+            <i class="icon clipboard"></i>
+          </button>
+
+          <button (click)="saveColor(c)"
+                  [ngClass]="{
+                    'btn md prm center': true,
+                    'scnd': checkContrast(hexToRgb(c))
+                  }">
+            <i class="icon heart-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+
   <!-- Color generation -->
   <div id="color-generation-container" [style.background]="'#'+color">
      <!-- Menu button -->
-     <button id="menu-button" [ngClass]="{
-                                'btn md prm center': true,
-                                'scnd': isConstrasted
-                              }">
+     <button  id="menu-button"
+              (click)="favoritesOpen = true"
+              [ngClass]="{
+                'btn md prm center': true,
+                'scnd': isConstrasted
+              }">
       <i class="icon burger"></i>
     </button>
     <!---->
@@ -48,27 +112,36 @@
         <!---->
 
         <!-- Save button -->
-        <button [ngClass]="{
+        <button (click)="saveColor(color)"
+                [ngClass]="{
                   'btn md prm center': true,
                   'scnd': isConstrasted
                 }">
-          <i class="icon heart"></i>
+          <i  [ngClass]="{
+                'icon': true,
+                'heart': !isSaved(color),
+                'heart-fill': isSaved(color)
+              }"></i>
         </button>
         <!---->
       </div>
 
       <!-- Hex code -->
-      <div id="hex-code"  [ngClass]="{
-                            'h3 t_black': true,
-                            't_white': isConstrasted
-                          }">{{color}}</div>
+      <div  id="hex-code"
+            [ngClass]="{
+              'h3': true,
+              't_black': !isConstrasted,
+              't_white': isConstrasted
+            }">
+        {{color}}
+      </div>
       <!---->
     </div>
 
     <!-- Randomize button -->
     <button id="generate-button"
             [ngClass]="{
-              'btn md prm center': true,
+              'btn md center prm': true,
               'scnd': isConstrasted
             }"
             (click)="genRandomColor()">
