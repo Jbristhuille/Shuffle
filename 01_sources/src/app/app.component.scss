@@ -48,6 +48,9 @@
 
   /* Colors list */
   #saved-color-list {
+    overflow: auto;
+    height: calc(100vh - 104px);
+
     .item {
       display: flex;
       justify-content: space-between;
