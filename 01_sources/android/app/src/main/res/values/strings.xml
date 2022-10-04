@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Shuffle: Random Color Generator</string>
+    <string name="title_activity_main">Shuffle: Random Color Generator</string>
+    <string name="package_name">com.hs.shuffle</string>
+    <string name="custom_url_scheme">com.hs.shuffle</string>
+</resources>
