@@ -6,6 +6,7 @@
 
 /* SUMMARY
   * Angular
+  * Capacitor
   * Name: getStorage
   * Name: saveColor
   * Name: isSaved
@@ -19,6 +20,10 @@
 
 /* Angular */
 import { Component, OnInit } from '@angular/core';
+/***/
+
+/* Capacitor */
+import { Clipboard } from '@capacitor/clipboard';
 /***/
 
 @Component({
@@ -109,8 +114,8 @@ export class AppComponent implements OnInit {
   * Args:
   * - color (String): Color to copy
   */
-  public copyToClipboard(color): void {
-    navigator.clipboard.writeText('#'+color);
+  public async copyToClipboard(color): Promise<void> {
+    await Clipboard.write({string: "#"+color});
     this.copiedColor = color;
 
     setTimeout(() => {
